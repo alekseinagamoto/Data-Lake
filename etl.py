@@ -1,5 +1,4 @@
 import configparser
-from datetime import datetime
 import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import monotonically_increasing_id
@@ -9,8 +8,11 @@ from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, dat
 config = configparser.ConfigParser()
 config.read('dl.cfg')
 
-os.environ['AWS_ACCESS_KEY_ID']=config['AWS_ACCESS_KEY_ID']
-os.environ['AWS_SECRET_ACCESS_KEY']=config['AWS_SECRET_ACCESS_KEY']
+os.environ['AWS_ACCESS_KEY_ID']=config['AWS']['AWS_ACCESS_KEY_ID']
+os.environ['AWS_SECRET_ACCESS_KEY']=config['AWS']['AWS_SECRET_ACCESS_KEY']
+
+READ_S3_BUCKET = config['S3']['READ_S3_BUCKET']
+WRITE_S3_BUCKET = config['S3']['WRITE_S3_BUCKET']
 
 
 def create_spark_session():
@@ -22,11 +24,18 @@ def create_spark_session():
 
 
 def process_song_data(spark, input_data, output_data):
+    """ Process song data and create songs and artists table
+    
+        Arguments:
+            spark {object}: SparkSession object
+            input_data {object}: Source S3 endpoint
+            output_data {object}: Destination S3 endpoint
+    """
     # get filepath to song data file
-    song_data = 
+    song_data = os.path.join(input_data + "song_data/*/*/*/*.json")
     
     # read song data file
-    df = 
+    df = spark.read.json(song_data)
 
     # extract columns to create songs table
     df.createOrReplaceTempView("song_data_view")
@@ -43,11 +52,17 @@ def process_song_data(spark, input_data, output_data):
 
 
 def process_log_data(spark, input_data, output_data):
+    """ Process log data and create users, time and songplays table
+        Arguments:
+            spark {object}: SparkSession object
+            input_data {object}: Source S3 endpoint
+            output_data {object}: Target S3 endpoint
+    """
     # get filepath to log data file
-    log_data =
+    log_data = os.path.join(input_data + 'log_data/*/*/*.json')
 
     # read log data file
-    df = 
+    df = spark.read.json(log_data)
     
     # filter by actions for song plays
     df.createOrReplaceTempView("log_data_view")
@@ -93,12 +108,9 @@ def process_log_data(spark, input_data, output_data):
 
 def main():
     spark = create_spark_session()
-    input_data = "s3a://udacity-dend/"
-    output_data = ""
     
-    process_song_data(spark, input_data, output_data)    
-    process_log_data(spark, input_data, output_data)
-
+    process_song_data(spark, READ_S3_BUCKET, WRITE_S3_BUCKET)    
+    process_log_data(spark, READ_S3_BUCKET, WRITE_S3_BUCKET)
 
 if __name__ == "__main__":
     main()
