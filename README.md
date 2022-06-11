@@ -58,8 +58,6 @@ The ETL pipline comprises the following components:
 
 ```
 ├── dl.cfg                      <- Config file 
-|
-|
 └── etl.py                      <- Script to execute ETL pipeline.                           
 
 ```
