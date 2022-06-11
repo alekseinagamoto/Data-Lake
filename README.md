@@ -58,9 +58,7 @@ You can run the ETL pipeline by running ```etl.py``` after creation of the EMR c
 ├── dl.cfg                      <- Config file 
 |
 |
-├── src                         <- Source code for use in this project.    
-    ├── scripts  
-        └── etl.py              <- Script to execute ETL pipeline.
+└── etl.py                      <- Script to execute ETL pipeline.                           
 
 ```
 
