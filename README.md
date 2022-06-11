@@ -16,7 +16,7 @@ A startup called Sparkify has been growing their user base and wants to move the
 ### Data
 
 The data resides in S3, in a directory of JSON logs on user activity (```s3://udacity-dend/log_data
-```) in the app as well as a directory with JSON metadata on the songs (```s3://udacity-dend/song_data```) in their app:
+```) in the app as well as a directory with JSON metadata on the songs (```s3://udacity-dend/song_data```) in their app.
 
 
 ### Database Schema
