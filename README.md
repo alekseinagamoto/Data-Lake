@@ -9,7 +9,7 @@
 
 ## About
 
-A startup called Sparkify has been growing their user base and wants to move their data warehouse to a data lake to continue to be able to analyze the data they've been collecting on songs and user activity on their new music streaming app. Currently the data resides in S3 and it is required to build an ETL pipeline that extratcs the data from S3, processes them using Spark, and loads the data back into a data lake on S3 as a set of dimensional tables.
+A startup called Sparkify has been growing their user base and wants to move their data to a data lake on S3to continue to be able to analyze the data they've been collecting on songs and user activity on their new music streaming app. Currently, the data resides in S3 and it is required to build an ETL pipeline that extratcs the data from S3, processes them using Spark, and loads the data back into a data lake on S3 as a set of dimensional tables.
 
 ## Data Lake Design
 
