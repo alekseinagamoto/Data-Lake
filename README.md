@@ -66,6 +66,6 @@ You can run the ETL pipeline by running ```etl.py``` after creation of the EMR c
 
 This project is part of the [Udacity Data Engineering nanodegree](https://www.udacity.com/course/data-engineer-nanodegree--nd027).
 
-- [PySpark](https://spark.apache.org/docs/latest/api/python/)
+- [PySpark documentation](https://spark.apache.org/docs/latest/api/python/)
 - [Amazon EMR documentation](https://aws.amazon.com/emr/)
 - [Markdown guide](https://www.markdownguide.org/basic-syntax/)
