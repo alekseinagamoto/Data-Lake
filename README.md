@@ -49,7 +49,9 @@ The ETL pipline comprises the following components:
 
 ### Execute ETL Pipeline
 
-You can run the ETL pipeline by running ```etl.py``` after creation of the EMR cluster.
+Ensure you update the AWS credentials and S3 bucket endpoints in ```dl.cfg``` file.
+
+You can then execute the ETL pipeline by running ```etl.py``` after creation of the EMR cluster.
 
 
 ## Directory Structure
