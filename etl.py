@@ -39,13 +39,13 @@ def process_song_data(spark, input_data, output_data):
 
     # extract columns to create songs table
     df.createOrReplaceTempView("song_data_view")
-    songs_table = spark.sql("SELECT song_id, title, artist_id, year, duration FROM song_data_view")
+    songs_table = spark.sql("SELECT DISTINCT song_id, title, artist_id, year, duration FROM song_data_view")
     
     # write songs table to parquet files partitioned by year and artist
     songs_table.write.partitionBy("year", "artist_id").mode("overwrite").parquet(path=output_data + "song_table.parquet")
 
     # extract columns to create artists table
-    artist_table = spark.sql("SELECT artist_id, artist_name as name, artist_location as location, artist_latitude as latitude, artist_longitude as longitude FROM song_data_view")   
+    artist_table = spark.sql("SELECT DISTINCT artist_id, artist_name as name, artist_location as location, artist_latitude as latitude, artist_longitude as longitude FROM song_data_view")   
     
     # write artists table to parquet files
     artist_table.write.mode("overwrite").parquet(path=output_data + "artist_table.parquet")
@@ -69,7 +69,7 @@ def process_log_data(spark, input_data, output_data):
     df = spark.sql("SELECT * FROM log_data_view WHERE page='NextSong'") 
 
     # extract columns for users table    
-    artists_table = spark.sql("SELECT userId as user_id, firstName as first_name, lastName as last_name, gender, level FROM log_data_view")
+    artists_table = spark.sql("SELECT DISTINCT userId as user_id, firstName as first_name, lastName as last_name, gender, level FROM log_data_view")
     
     # write users table to parquet files
     artists_table.write.mode("overwrite").parquet(path=output_data + "user_table.parquet")
